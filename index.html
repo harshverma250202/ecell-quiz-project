@@ -420,13 +420,15 @@
         var btns2 = document.getElementById("btn2")
         var btns3 = document.getElementById("btn3")
         var btns4 = document.getElementById("btn4")
+        var btns5 = document.getElementById("btn5")
+        var btns6 = document.getElementById("btn6")
         var btns7 = document.getElementById("btn7")
         var a1 = document.getElementById("mainboxin")
         var a2 = document.getElementById("testres")
         btns1.style.backgroundColor="rgb(34, 34, 34)";
-        btns1.style.backgroundColor="rgb(34, 34, 34)";
-        btns1.style.backgroundColor="rgb(34, 34, 34)";
-        btns1.style.backgroundColor="rgb(34, 34, 34)";
+        btns2.style.backgroundColor="rgb(34, 34, 34)";
+        btns3.style.backgroundColor="rgb(34, 34, 34)";
+        btns4.style.backgroundColor="rgb(34, 34, 34)";
 
 
 
@@ -470,6 +472,12 @@
 
             if (i < len) {
                 ++i;
+                if(i==3){
+        btns6.style.display="none";
+    }
+    else{
+        btns6.style.display="flex";
+    }
            /*     if(i>len-1){i=0;}*/
                 var i1=i+1;
                 p1.innerHTML =  "Q"+i1+".     " + questions[i].question
@@ -503,6 +511,12 @@
 
             if (i > -1) {
                 --i;
+                if(i==3){
+        btns6.style.display="none";
+      }
+    else{
+        btns6.style.display="flex";
+    }
              /*   if(i<0){i=len-1;}*/
                 var i1=i+1;
                 p1.innerHTML =  "Q"+(i1)+".      " + questions[i].question
@@ -518,7 +532,6 @@
 
 
         }
-
 
 
 
@@ -644,7 +657,12 @@ window.location.reload();
 
         }
 
-
+    if(i==3){
+        btns6.style.display="none";
+    }
+    else{
+        btns6.style.display="flex";
+    }
 
 
 
