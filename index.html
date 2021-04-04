@@ -280,7 +280,7 @@
     </style>
 </head>
 
-<body>
+<body id="body1">
 
 
     <button class="startbtn" id="startbutton" onclick="starttest()">START TEST<br>Time: 30s</button>
@@ -637,9 +637,10 @@
 
         function reload()
         {
-            document.getElementById('startbutton').style.display = "block";
+        /*    document.getElementById('startbutton').style.display = "block";
             a2.style.display = "none";
-
+*/
+window.location.reload();
 
         }
 
