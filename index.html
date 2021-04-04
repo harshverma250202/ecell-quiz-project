@@ -318,6 +318,7 @@
         <p id="res1"></p><br>
    
         <p id="wro1"></p>
+        <button class="btn"  onclick="reload()">Retest</button>
         <footer>@made by Harsh Verma</footer>
 
 
@@ -629,6 +630,16 @@
             document.getElementById('totalq').innerHTML = " total question  :"+len;
             document.getElementById('res1').innerHTML ="correct questions :" +sum;
             document.getElementById('wro1').innerHTML = "incorrect questions  :"+ k1;
+
+        }
+
+
+
+        function reload()
+        {
+            document.getElementById('startbutton').style.display = "block";
+            a2.style.display = "none";
+
 
         }
 
