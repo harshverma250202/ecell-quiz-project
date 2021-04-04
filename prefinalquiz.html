@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link  href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', cursive !important;
+            margin: 0;
+            color: white;
+            
+        }
+
+        body {
+            background-color: rgb(255, 255, 255);
+            font-family: 'Poppins', cursive !important;
+            background-color: rgb(0, 217, 255);
+
+
+
+
+        }
+
+        .main-box-in {
+
+            display: none;
+            width: 800px;
+            max-width: 80%;
+            margin: auto;
+            margin-top: 30vh;
+            background-color: rgb(0, 0, 0);
+           
+            font-weight: bolder;
+
+            border-radius: 10px;
+
+
+
+
+
+            border: solid rgb(47, 137, 255) 5px;
+            box-shadow: 0 0 12px 2px;
+
+
+        }
+
+        .question {
+           
+            font-weight: 600;
+            font-size: 25px;
+            margin-left: 4%;
+            margin-right: 4%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .btngrid {
+
+            display: grid;
+            grid-template-columns: repeat(2, auto);
+            padding: 10px;
+         
+        }
+
+        .btnoption {
+
+            margin: 10px;
+            height: 7vh;
+
+            width: 20vw;
+            border-radius: 10px;
+            border: solid rgb(47, 137, 255) 3px;
+            font-size: 15px;
+            background-color: rgb(36, 36, 36);
+            text-align: left;
+        
+        }
+       
+
+        .btn {
+            margin: 10px;
+            height: 4vh;
+             background-color: rgb(34, 34, 34);
+            width: 12vw;
+            border-radius: 10px;
+         
+            font-size: 15px;
+            border: solid rgb(47, 137, 255) 3px;
+            font-size: 15px;
+        
+        }
+
+        #btn7 {
+            position: relative;
+            left: 20%;
+        }
+
+        .startbtn {
+
+            height: 20vh;
+
+            width: 40vw;
+            border-radius: 10px;
+            border: solid rgb(47, 137, 255) 3px;
+            background-color: rgb(0, 0, 0);
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+            display: block;
+            
+            margin: auto;
+            text-align: center;
+            margin-top: 40vh;
+            justify-content: center;
+            box-shadow: 0 0 12px 2px;
+            
+
+
+        }
+
+        .startbtn:hover {
+            background-color: rgb(0, 68, 255);
+
+        }
+
+        .btnoption:hover {
+            background-color:rgb(0, 217, 255);
+        }
+        .btn:hover{
+            background-color: rgb(0, 217, 255);
+        
+        }
+       footer{
+            display: block;
+            position: absolute;
+            bottom: 0;
+           
+            left: 40vw;
+            color: white;
+        }
+        .testresult{
+            display: none;   text-align: center;  font-size: 25px;
+            background-color: black;
+            border: solid rgb(47, 137, 255) 3px;
+            width: 400px;
+            max-width: 50%;
+            margin: auto;
+            margin-top: 15vh;
+            border-radius: 10px;
+            box-shadow: 0 0 12px 2px;
+            
+
+        }
+        #totalq,#wro1,#res1{
+            margin: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <button class="startbtn" id="startbutton" onclick="starttest()">START TEST<br>Time: 30s</button>
+
+
+
+    <div class="main-box-in" id="mainboxin">
+        <div class="question">
+            <p id="p1">Question</p><p id="timer"></p> 
+           
+        </div>
+        <div class="btngrid">
+            <button class="btnoption" id="btn1" onclick="correcto1()">option 1</button>
+            <button class="btnoption" id="btn2" onclick="correcto2()">option 2</button>
+            <button class="btnoption" id="btn3" onclick="correcto3()">option 3</button>
+            <button class="btnoption" id="btn4" onclick="correcto4()">option 4</button>
+        </div>
+        <button class="btn" id="btn5" onclick="backward()">back</button>
+        <button class="btn" id="btn6" onclick="forward()">Next</button>
+        <button class="btn" id="btn7" onclick="result()">FInish</button>
+
+
+
+    </div>
+
+
+
+    <div class="testresult" style=""
+        id="testres">
+        <p id="totalq"></p><br>
+
+        
+        <p id="res1"></p><br>
+   
+        <p id="wro1"></p>
+        <footer>@made by Harsh Verma</footer>
+
+
+    </div>
+     
+    
+    
+    
+    
+
+
+
+    <script>
+
+
+
+        function starttest() {
+            document.getElementById('startbutton').style.display = "none";
+            document.getElementById('mainboxin').style.display = "block";
+            var lefttime = 30000;
+
+            var x = setInterval(function () {
+
+
+
+
+                lefttime = lefttime - 1000;
+
+
+                var hours = Math.floor((lefttime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((lefttime % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((lefttime % (1000 * 60)) / 1000);
+
+                document.getElementById("timer").innerHTML = hours + " h "
+                    + minutes + " m " + seconds + " s ";
+
+
+                if (lefttime < 0) {
+                    clearInterval(x);
+                    timeout();
+
+                }
+            }, 1000);
+        }
+
+
+
+
+
+
+
+
+        var questions = [
+            {
+                question: 'What is 2 + 2?',
+                answer: [
+                    { text: '4', correct: true },
+                    { text: '5', correct: false },
+                    { text: '5', correct: false },
+                    { text: '55', correct: false }
+                ]
+            },
+            {
+                question: 'What is 2 + 6?',
+                answer: [
+                    { text: '8', correct: false},
+                    { text: '22', correct: false },
+                    { text: '8', correct: true  },
+                    { text: '5', correct: false }
+                ]
+            },
+            {
+                question: 'What is 10 + 6?',
+                answer: [
+                    { text: '15', correct: false },
+                    { text: '22', correct: false },
+                    { text: '24', correct: false },
+                    { text: '16', correct: true }
+                ]
+            },
+            {
+                question: 'What is 6+ 6?',
+                answer: [
+                    { text: '12', correct: true },
+                    { text: '84', correct: false },
+                    { text: '7', correct: false },
+                    { text: '82', correct: false }
+                ]
+            }
+
+        ]
+
+
+
+        var len = questions.length;
+        var z = new Array(questions.length).fill(0);
+        var que = document.getElementById('p1')
+        var btns1 = document.getElementById("btn1")
+        var btns2 = document.getElementById("btn2")
+        var btns3 = document.getElementById("btn3")
+        var btns4 = document.getElementById("btn4")
+        var btns7 = document.getElementById("btn7")
+        var a1 = document.getElementById("mainboxin")
+        var a2 = document.getElementById("testres")
+        btns1.style.backgroundColor="rgb(34, 34, 34)";
+        btns1.style.backgroundColor="rgb(34, 34, 34)";
+        btns1.style.backgroundColor="rgb(34, 34, 34)";
+        btns1.style.backgroundColor="rgb(34, 34, 34)";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        var i = 0
+        var i1=i+1;
+                p1.innerHTML =  "Q"+(i1)+".     " + questions[i].question
+        
+        btns1.innerHTML = "A. " + questions[i].answer[0].text
+        btns2.innerHTML = "B. "+questions[i].answer[1].text
+        btns3.innerHTML =  "C. "+questions[i].answer[2].text
+        btns4.innerHTML =   "D. "+questions[i].answer[3].text
+
+
+
+
+
+
+        function forward() {
+            btns1.style.backgroundColor="rgb(34, 34, 34)";
+        btns2.style.backgroundColor="rgb(34, 34, 34)";
+        btns3.style.backgroundColor="rgb(34, 34, 34)";
+        btns4.style.backgroundColor="rgb(34, 34, 34)";
+
+
+
+            if (i < len) {
+                ++i;
+                if(i>len-1){i=0;}
+                var i1=i+1;
+                p1.innerHTML =  "Q"+i1+".     " + questions[i].question
+
+           
+        btns1.innerHTML = "A. " + questions[i].answer[0].text
+        btns2.innerHTML = "B. "+questions[i].answer[1].text
+        btns3.innerHTML =  "C. "+questions[i].answer[2].text
+        btns4.innerHTML =   "D. "+questions[i].answer[3].text
+
+                console.log(i1);
+
+            }
+
+
+
+        }
+
+
+
+
+
+             var i1=i+1;
+        function backward() {
+            btns1.style.backgroundColor="rgb(34, 34, 34)";
+        btns2.style.backgroundColor="rgb(34, 34, 34)";
+        btns3.style.backgroundColor="rgb(34, 34, 34)";
+        btns4.style.backgroundColor="rgb(34, 34, 34)";
+
+
+
+            if (i > -1) {
+                --i;
+                if(i<0){i=len-1;}
+                var i1=i+1;
+                p1.innerHTML =  "Q"+(i1)+".      " + questions[i].question
+        btns1.innerHTML = "A. " + questions[i].answer[0].text
+        btns2.innerHTML = "B. "+questions[i].answer[1].text
+        btns3.innerHTML =  "C. "+questions[i].answer[2].text
+        btns4.innerHTML =   "D. "+questions[i].answer[3].text
+
+                console.log(i);
+
+            }
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function correcto1() {
+
+            btns1.style.backgroundColor="rgb(0, 217, 255)";
+        btns2.style.backgroundColor="rgb(34, 34, 34)";
+        btns3.style.backgroundColor="rgb(34, 34, 34)";
+        btns4.style.backgroundColor="rgb(34, 34, 34)";
+
+
+
+            if (questions[i].answer[0].correct) {
+                z[i] = 1;
+
+            }
+            else {
+                z[i] = 0;
+            }
+        }
+        function correcto2() {
+            btns1.style.backgroundColor="rgb(34, 34, 34)";
+        btns2.style.backgroundColor="rgb(0, 217, 255)";
+        btns3.style.backgroundColor="rgb(34, 34, 34)";
+        btns4.style.backgroundColor="rgb(34, 34, 34)";
+
+            if (questions[i].answer[1].correct) {
+                z[i] = 1;
+            }
+            else {
+                z[i] = 0;
+            }
+        }
+        function correcto3() {
+            btns1.style.backgroundColor="rgb(34, 34, 34)";
+            btns2.style.backgroundColor="rgb(34, 34, 34)";
+            btns3.style.backgroundColor="rgb(0, 217, 255)";
+            btns4.style.backgroundColor="rgb(34, 34, 34)";
+ 
+            if (questions[i].answer[2].correct) {
+                z[i] = 1;
+            }
+            else {
+                z[i] = 0;
+            }
+        }
+        function correcto4() {
+            btns1.style.backgroundColor="rgb(34, 34, 34)";
+        btns2.style.backgroundColor="rgb(34, 34, 34)";
+        btns3.style.backgroundColor="rgb(34, 34, 34)";
+        btns4.style.backgroundColor="rgb(0, 217, 255)";
+
+            if (questions[i].answer[3].correct) {
+                z[i] = 1;
+            }
+            else {
+                z[i] = 0;
+            }
+        }
+
+
+        function result() {
+
+            if (confirm("DO YOU WANT TO SUBMIT THE TEST!")) {
+                a1.style.display = "none";
+                a2.style.display = "block";
+                var sum = 0;
+                for (let j = 0; j < len; ++j) {
+                    sum += z[j];
+                }
+
+
+                var k1=len - sum;
+                console.log(sum);
+                document.getElementById('totalq').innerHTML = " total question  :"+ len
+            document.getElementById('res1').innerHTML ="correct questions :" + sum;
+            document.getElementById('wro1').innerHTML = "incorrect questions  :"  + k1;
+
+
+
+
+
+            } else {
+
+            }
+
+        }
+
+        function timeout() {
+            a1.style.display = "none";
+            a2.style.display = "block";
+            var sum = 0;
+            for (let j = 0; j < len; ++j) {
+                sum += z[j];
+            }
+            var k1=len - sum;
+            console.log(sum);
+            document.getElementById('totalq').innerHTML = " total question  :"+len;
+            document.getElementById('res1').innerHTML ="correct questions :" +sum;
+            document.getElementById('wro1').innerHTML = "incorrect questions  :"+ k1;
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>
